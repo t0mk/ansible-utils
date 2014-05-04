@@ -9,9 +9,7 @@ import subprocess
 import tempfile
 import atexit
 
-interval = 3
-
-desc = ('Apply a role to a host from ansible inventory')
+desc = ('Apply a role to a hosts from ansible inventory')
 
 class AnsibleWrapperError(Exception):
     pass
@@ -54,7 +52,7 @@ def main(args_list):
 
     # cur dir is tmp_dir
     # desired role is in role_name
-    # desired host is in args.host
+    # desired hosts are in args.hosts
     role_dict = {'role': role_name}
     if args.params:
         params_dict = yaml.load(args.params)
@@ -62,10 +60,8 @@ def main(args_list):
             raise AnsibleWrapperError("params must be a dict")
         role_dict.update(params_dict)
 
-    print role_dict
-
     playbook = [{
-      'hosts': args.host,
+      'hosts': ":".join(args.hosts),
       'roles': [role_dict],
     }]
 
@@ -92,11 +88,12 @@ def get_args(args_list):
     help_role = ("ansible role. Must be a direcoty with the role, or url of "
                 "remote git repo.")
     help_test = 'test - dont run ansible-playbook'
-    help_host = 'host alias present in ansible inventory'
+    help_hosts = ('host aliases present in ansible inventory, '
+                  'separated by space')
     help_params = 'parameters for the role in file'
     help_debug = 'dont remove temporary dir'
 
-    parser.add_argument('host', help=help_host)
+    parser.add_argument('hosts', metavar='HOST', help=help_hosts, nargs='+')
     parser.add_argument('-r', '--role', help=help_role, required=True)
     parser.add_argument('-p', '--params', help=help_params,
                         type=argparse.FileType('r'))

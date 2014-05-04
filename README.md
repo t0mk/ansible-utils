@@ -38,7 +38,9 @@ If the role has parameters, you can put them to a file as a yaml dict and pass
 the filename to the script in the -p/--params argument:
 
 ```
-echo "dummy_ansible_role_parameter: defined_in_params" > params
-ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git -p params testhost
+echo "dummy_ansible_role_parameter: defined_in_params" > params.yml
+ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git -p params.yml testhost
 ```
+
+You can also pass more than one host in positional arguments.
 
