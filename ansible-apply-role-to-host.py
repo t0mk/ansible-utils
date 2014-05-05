@@ -73,7 +73,8 @@ def main(args_list):
     callCheck("ansible-playbook --syntax-check i.yml")
 
     if not args.test:
-        ansible_cmd = "ansible-playbook -v -s i.yml"
+        ansible_cmd = ( "ansible-playbook -v -s i.yml " +
+                        " ".join(unparsed_args_list))
         callCheck(ansible_cmd)
     else:
         print 'A test run, _NOT_ running ansible-playbook'
