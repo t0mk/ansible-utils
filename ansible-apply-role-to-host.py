@@ -41,8 +41,11 @@ def main(args_list):
         shutil.copytree(role_dir, dest_dir)
         print "copied role %s" % args.role
 
-    elif args.role.endswith('.git'):
-        role_name = args.role.split('/')[-1].split('.')[0]
+    elif args.role.startswith('https://git'):
+        role_name = args.role
+        if role_name.endswith('.git'):
+            role_name = role_name[:-4]
+        role_name = args.role.split('/')[-1]
         os.chdir(os.path.join(tmp_dir, 'roles'))
         callCheck("git clone %s" % args.role)
         print "cloned role %s" % args.role
