@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# prints all the found variables in a role formatted as a markdown list.
+# useful when compiling README.md
+
+[ -d "./tasks" ] || echo "run this in role directory"
+[ -d "./tasks" ] || exit 1
+
+ROLE_NAME=`basename $PWD`
+
+grep -ri "${ROLE_NAME}_[^[:space:]]*" * | sed "s/^.*\(${ROLE_NAME}_[^[:space:]:]*\).*$/\`\1\` - /" | sort | uniq | sed -e 's/^/* /'
+
