@@ -5,15 +5,46 @@ Ansible wrappers
 ## install
 
 ```
-cd ~/bin
-git clone https://github.com/t0mk/ansible-utils
-echo 'PATH=${PATH}:~/bin/ansible-utils' >> ~/.zshrc
+$ cd ~/bin
+$ git clone https://github.com/t0mk/ansible-utils
+$ echo 'PATH=${PATH}:~/bin/ansible-utils' >> ~/.zshrc
 
 # if you still use Bash I encourage you to check zsh and oh-my-zsh but anyway:
 # echo 'PATH=${PATH}:~/bin/ansible-utils' >> ~/.bashrc
 ```
 
-## ansible-apply-role-to-host.py
+## ansible-get-roles
+
+This is sth like librarian for ansible. It downloads all the roles from their
+git repos. It takes the first playbook from a file and processes all the dicts
+in the 'roles' item.
+
+Use as
+
+```
+$ cd playbook_dir
+$ ansible-get-roles -p playbook.yml
+```
+
+## ansible-print-all-user-variables-in-role
+
+This prints all the variables used in a role. It prints it as a markdown
+bulletpoints. It's useful when you are writing a role and want to start a
+README.md. You can do sth like:
+
+```
+$ cd roles/redmine
+$ ansible-print-all-used-variables-in-role
+* `redmine_branch` -
+* `redmine_db` -
+[...]
+
+$ ansible-print-all-used-variables-in-role >> README.md
+```
+
+It's not perfect yet.
+
+## ansible-apply-role-to-host
 
 This is for the case when you stumble upon an ansible role on github and you
 would like to check how it works for you, or for your VM image, or OS version.
@@ -31,15 +62,15 @@ the role and write a playbook.
 With the script, you can instead just do:
 
 ```
-ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git testhost
+$ ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git testhost
 ```
 
 If the role has parameters, you can put them to a file as a yaml dict and pass
 the filename to the script in the -p/--params argument:
 
 ```
-echo "dummy_ansible_role_parameter: defined_in_params" > params.yml
-ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git -p params.yml testhost
+$ echo "dummy_ansible_role_parameter: defined_in_params" > params.yml
+$ ansible-apply-role-to-host -r https://github.com/t0mk/dummy_ansible_role.git -p params.yml testhost
 ```
 
 You can also pass more than one host in positional arguments.

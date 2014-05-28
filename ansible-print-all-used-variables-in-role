@@ -8,5 +8,5 @@
 
 ROLE_NAME=`basename $PWD`
 
-grep -ri "${ROLE_NAME}_[^[:space:]]*" * | sed "s/^.*\(${ROLE_NAME}_[^[:space:]:]*\).*$/\`\1\` - /" | sort | uniq | sed -e 's/^/* /'
+grep -ri " ${ROLE_NAME}_[^[:space:]]*" * | sed "s/^.*\(${ROLE_NAME}_[^[:space:]:]*\).*$/* \`\1\` - /" | sort | uniq
 
