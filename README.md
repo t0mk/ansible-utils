@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [ansible-utils](#ansible-utils)
+  - [install](#install)
+  - [ansible-get-roles](#ansible-get-roles)
+  - [ansible-print-all-user-variables-in-role](#ansible-print-all-user-variables-in-role)
+  - [ansible-apply-role-to-host](#ansible-apply-role-to-host)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # ansible-utils
 
 Ansible wrappers
