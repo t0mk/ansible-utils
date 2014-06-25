@@ -45,7 +45,7 @@ def main(args_list):
         role_name = args.role
         if role_name.endswith('.git'):
             role_name = role_name[:-4]
-        role_name = args.role.split('/')[-1]
+        role_name = role_name.split('/')[-1]
         os.chdir(os.path.join(tmp_dir, 'roles'))
         callCheck("git clone %s" % args.role)
         print "cloned role %s" % args.role
