@@ -38,6 +38,8 @@ $ cd playbook_dir
 $ ansible-get-roles -p playbook.yml
 ```
 
+**This is not necessary as of 1.8. You should use ansible-galaxy install -r requirements.yml**
+
 ## ansible-print-all-user-variables-in-role
 
 This prints all the variables used in a role. It prints it as a markdown
