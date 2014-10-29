@@ -68,15 +68,17 @@ def main(args_list):
       'roles': [role_dict],
     }]
 
-    with open ('i.yml', 'w') as playbook_file:
+    pb_file = role_name.replace('/', '_').replace(' ', '_')
+
+    with open (pb_file, 'w') as playbook_file:
         playbook_file.write(yaml.dump(playbook))
 
-    callCheck("cat i.yml")
+    callCheck("cat %s" % pb_file)
 
-    callCheck("ansible-playbook --syntax-check i.yml")
+    callCheck("ansible-playbook --syntax-check %s" % pb_file)
 
     if not args.test:
-        ansible_cmd = ( "ansible-playbook -v -s i.yml " +
+        ansible_cmd = ( "ansible-playbook -v -s %s " % pb_file +
                         " ".join(unparsed_args_list))
         callCheck(ansible_cmd)
     else:
